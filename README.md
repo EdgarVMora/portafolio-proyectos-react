@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+📋 Acerca del proyecto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto es una colección de ejercicios prácticos diseñados para desarrollar y reforzar habilidades en React. Cada ejercicio aborda diferentes aspectos fundamentales del desarrollo, incluyendo:
 
-## Available Scripts
+Formularios y manejo de estado
+Enrutamiento y navegación
+Componentes y accesorios
+Hooks y ciclo de vida
+Estilos y diseño responsive
+El objetivo es aprender mediante la práctica y completar retos enfocados en problemas específicos.
 
-In the project directory, you can run:
+🎯 Ejercicio Actual: Formulario de Inicio de Sesión Básico
 
-### `npm start`
+Duración: 3 días + 1 día para extras
+Este es el primer reto del proyecto y consiste en implementar un formulario de inicio de sesión funcional con React, siguiendo los requisitos descritos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🏁 Requisitos Mínimos (3 días)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+✔️ Crear una aplicación React :
+Iniciar un proyecto básico de React que contiene un componente de formulario.
 
-### `npm test`
+✔️ Formulario de inicio de sesión :
+Incluir los siguientes campos:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Correo electrónico : Un campo de entrada con una etiqueta descriptiva ( label).
+Contraseña : Un campo de entrada con una etiqueta descriptiva ( label).
+✔️ Botón de "Iniciar Sesión" :
+Agregar un botón que envía el formulario al ser presionado.
 
-### `npm run build`
+✔️ Manejo de Estado :
+Usar useStatepara manejar el estado de los campos del formulario.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+✔️ Mostrar datos en consola :
+Al enviar el formulario, los datos ingresados ​​deben imprimirse en la consola, evitando el comportamiento predeterminado del navegador.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+💡 Extras (1 día)
+✨ Estilización con CSS :
+Aplicar un diseño básico para mejorar la apa
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+✨ Efectos hover :
+Agregar efectos hover al botón de "Iniciar Sesión".
 
-### `npm run eject`
+✨ Diseño responsive :
+Asegurarse de que el formulario se adapte a diferentes tamaños de pantalla.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+🌟 Lo Aprendiste
+1️⃣ La etiqueta<form>
+La estrella
+Su integración con React y cómo manejar su envío mediante eventos.
+2️⃣ El métodopreventDefault()
+Cómo evitar el comportamiento predeterminado del navegador (como recargar la página al enviar un formulario).
+Mayor control sobre la lógica de envío en React.
+3️⃣ El atributohtmlFor
+Mejorar la accesibilidad de los formularios asociando etiquetas ( label) con sus campos de entrada.
+Diferencia entre htmlForReact y forHTML puro.
+🚀 Cómo Ejecutar el Proyecto
+Clona este repositorio:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+intento
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Copiar código
+git clone <URL_DEL_REPOSITORIO>
+cd <NOMBRE_DEL_PROYECTO>
+Instalar las dependencias:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+intento
 
-## Learn More
+Copiar código
+npm install
+Inicia el servidor de desarrollo:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+intento
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Copiar código
+npm start
+Accede a la aplicación en tu navegador en http://localhost:3000.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
