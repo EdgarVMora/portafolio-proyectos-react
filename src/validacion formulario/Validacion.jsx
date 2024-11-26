@@ -9,17 +9,25 @@ const Login = () => {
     
     const enviarInformacion = (event) => {
         event.preventDefault(); 
-        if (!email) {
-            console.log("El campo de correo electrónico está vacío.");
-            alert("Por favor, ingresa tu correo electrónico.");
-            return;
-        }
+        /*
+         if (!email) {
+             console.log("El campo de correo electrónico está vacío.");
+             alert("Por favor, ingresa tu correo electrónico.");
+             return;
+         }
+        */
+         let emailInvalido = !email ? "correo invalido" : "correo valido"
+         alert(emailInvalido)
+        /*
+         if (!password) {
+             console.log("El campo de contraseña está vacío.");
+             alert("Por favor, ingresa tu contraseña.");
+             return;
+         }
+        */
+         let passwordInvalido = !password ? "contraseña invalida" : "contraseña valida"
+         alert(passwordInvalido)
 
-        if (!password) {
-            console.log("El campo de contraseña está vacío.");
-            alert("Por favor, ingresa tu contraseña.");
-            return;
-        }
         console.log("Email:", email);
         console.log("Password:", password);
         alert(`Bienvenido, ${email}`);
