@@ -3,12 +3,15 @@ import "./validacion.css";
 
 const Login = () => {
     //maneje las variables en ingles por que no sabia si podia usar la ñ
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [emailError, setEmailError] = useState(false)
+    const [passwordError, setPasswordError] = useState(false)
+
 
     
     const enviarInformacion = (event) => {
-        event.preventDefault(); 
+        event.preventDefault() 
         /*
          if (!email) {
              console.log("El campo de correo electrónico está vacío.");
@@ -28,9 +31,15 @@ const Login = () => {
          let passwordInvalido = !password ? "contraseña invalida" : "contraseña valida"
          alert(passwordInvalido)
 
-        console.log("Email:", email);
-        console.log("Password:", password);
-        alert(`Bienvenido, ${email}`);
+         setEmailError(!email)
+         setPasswordError(!password)
+
+        if(email && password){
+            console.log("Email:", email);
+            console.log("Password:", password);
+            alert(`Bienvenido, ${email}`);
+        }
+        
     };
 
     return (
@@ -45,7 +54,7 @@ const Login = () => {
                     placeholder="Ingresa tu correo"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
+                    className={emailError ? "error" : ""}
                 />
 
                 <label htmlFor="password">Contraseña</label>
@@ -55,7 +64,7 @@ const Login = () => {
                     placeholder="Ingresa tu contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
+                    className={passwordError ? "error" : ""}
                 />
 
                 <button type="submit">Iniciar Sesión</button>

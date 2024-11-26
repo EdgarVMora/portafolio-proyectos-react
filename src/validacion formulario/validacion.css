@@ -3,7 +3,8 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: magenta;
+    background-color:cornflowerblue;
+    
 }
 
 .estructura-login {
@@ -12,4 +13,24 @@
     width: 300px;
     display: flex;
     flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.estructura-login h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+.estructura-login input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input.error{
+    border-color: red;
 }
