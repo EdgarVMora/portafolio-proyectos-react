@@ -1,0 +1,15 @@
+.contenedor-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(71, 143, 163);
+}
+
+.estructura-login {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
