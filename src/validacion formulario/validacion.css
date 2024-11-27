@@ -45,20 +45,28 @@ button {
     cursor: pointer;
 }
 
-@media (max-width: 600px) {
-    .login-form {
+@media (max-width: 480px) {
+    .contenedor-login {
+        padding: 10px; 
+    }
+
+    .estructura-login {
         width: 90%; 
-        margin: 20px auto; 
         padding: 15px; 
     }
 
-    input {
-        font-size: 12px;
+    .estructura-login input {
+        font-size: 12px; 
         padding: 8px; 
     }
 
     button {
         font-size: 14px; 
         padding: 8px; 
+    }
+
+    .estructura-login h2 {
+        font-size: 18px; 
+        margin-bottom: 15px; 
     }
 }
