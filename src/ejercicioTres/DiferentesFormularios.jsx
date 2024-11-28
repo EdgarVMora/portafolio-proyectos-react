@@ -2,30 +2,55 @@ import { useState } from "react";
 import "./diferentes-formularios.css"; 
 
 const Login = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [nameError, setNameError]=useState(false)
+    const [lastNameError, setLastNameError]=useState(false)
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
+    const [passwordErrorEmpty, setPasswordErrorEmpty] = useState(false)
+
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
 
 
+    const handlePassword = (event) =>{
+        const valida = event.target.value
+
+        setPassword(valida)
+        setPasswordErrorEmpty(valida === "")
+
+    }
     
     const enviarInformacion = (event) => {
         event.preventDefault() 
-  
-         let emailInvalido = !email ? "correo invalido" : "correo valido"
-         alert(emailInvalido)
-    
-         let passwordInvalido = !password ? "contraseña invalida" : "contraseña valida"
-         alert(passwordInvalido)
+        const name = event.target.elements.name.value
+        const lastName = event.target.elements.lastName.value
+        const email = event.target.elements.email.value
 
-         setEmailError(!email)
-         setPasswordError(!password)
+        if (!name || !lastName || !email){
+            setNameError(true)
+            setLastNameError(true)
+            setEmailError(true)
+            return
 
-        if(email && password){
-            console.log("Email:", email);
-            console.log("Password:", password);
-            alert(`Bienvenido, ${email}`);
+        } else {
+            console.log("Nombre: ", name)
+            console.log("Apellidos: ", lastName)
+            console.log("Email: ", email)
         }
+
+        if (!password) {
+            setPasswordErrorEmpty(true)
+            return
+        }
+
+        if(password !== confirmPassword){
+            setPasswordError(true)
+            return
+        } 
+
+        setPasswordError(false)
+        console.log("las constraseñas coinciden")
+        console.log("Contraseña:", password)
         
     };
 
@@ -38,24 +63,30 @@ const Login = () => {
                     type="text"
                     id="name"
                     placeholder="ingresa tu nombre" 
+                    className={nameError ? "error" : ""}
+                    onChange={()=>setNameError(false)}
                 />
+                {nameError && <span className="error_message">Este campo es obligatorio</span>}
 
                 <label htmlFor="last-name">Apellidos</label>
                 <input 
                     type="text"
-                    id="last-name"
+                    id="lastName"
                     placeholder="ingresa tus apellidos" 
-                />  
+                    className={lastNameError ? "error" : ""}
+                    onChange={()=>setLastNameError(false)}
+                /> 
+                {lastNameError && <span className="error_message">Este campo es obligatorio</span>} 
 
                 <label htmlFor="email">Correo Electrónico</label>
                 <input
                     type="email"
                     id="email"
                     placeholder="Ingresa tu correo"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
                     className={emailError ? "error" : ""}
+                    onChange={()=>setEmailError(false)}
                 />
+                 {emailError && <span className="error_message">Este campo es obligatorio</span>} 
 
                 <label htmlFor="password">Contraseña</label>
                 <input
@@ -63,14 +94,21 @@ const Login = () => {
                     id="password"
                     placeholder="crea una contraseña"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className={passwordError ? "error" : ""}
+                    onChange={handlePassword}
+                    className={passwordErrorEmpty ? "error" : ""}                    
                 />
+                {passwordErrorEmpty && <span className="error_message">Este campo es obligatorio</span>}
+
+                <label htmlFor="confirmPassword">Confirma tu contraseña</label>
                 <input 
                     type="password"
-                    id="confirm-password"
+                    id="confirmPassword"
                     placeholder="confirma tu contraseña"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className={passwordError ? "error" : ""}
                 />
+                {passwordError && <span className="error_message">Las constraseñas no coinciden</span>}
 
                 <fieldset>
                     <legend>Seleciona tu genero:</legend>
