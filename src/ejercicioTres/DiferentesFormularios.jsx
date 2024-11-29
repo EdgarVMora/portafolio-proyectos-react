@@ -35,6 +35,7 @@ const Login = () => {
     }
     */
 
+
     const handlePassword = (event) =>{
         const valida = event.target.value
 
@@ -88,6 +89,8 @@ const Login = () => {
         .map((checkbox) => checkbox.value)
         const birthday = event.target.elements.birthday.value
         
+        const datos = {};
+
 
         if (!name || !lastName || !email){
             setNameError(true)
@@ -96,29 +99,33 @@ const Login = () => {
             return
 
         } else {
-            console.log("Nombre: ", name)
-            console.log("Apellidos: ", lastName)
-            console.log("Email: ", email)
+            datos.nombre = name;
+            datos.apellidos = lastName;
+            datos.email = email;
         }
 
         if (!password) {
             setPasswordErrorEmpty(true)
             return
+        } else{
+            datos.password = password;
         }
 
         if(password !== confirmPassword){
             setPasswordError(true)
             return
-        } 
+        } else {
+            datos.confirmPassword = confirmPassword;
+        }
 
         setPasswordError(false)
-        console.log("las constraseñas coinciden")
-        console.log("Contraseña:", password)
+       
 
         if (!gener) {
             setGenerError(true)
         } else {
             setGenerError(false)
+            datos.genero = gener;
         }
 
         console.log("Género seleccionado:", gener)
@@ -127,15 +134,18 @@ const Login = () => {
             setHobbyError(true)
         } else {
             setHobbyError(false)
+            datos.hobby = hobbies;
         }
 
         console.log("Hobbies seleccionados:", hobbies)
 
         if(!birthday){
             setBirthdayError("selecciona tu fecha de nacimiento")
+        } else  {
+            datos.cumpleanos = birthday;
         }
 
-        console.log("Tu fecha de nacimiento es: ", birthday)
+    
 
         /*
         if (isFormValid) {
@@ -145,6 +155,7 @@ const Login = () => {
         }
         */
         
+        console.log("Datos del formulario:", datos);
     };
 
     return (
