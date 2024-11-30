@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import { useEffect } from "react";
 import "./diferentes-formularios.css"; 
 
 const Login = () => {
@@ -11,14 +10,13 @@ const Login = () => {
     const [generError, setGenerError] = useState(false)
     const [hobbyError, setHobbyError] = useState(false)
     const [birthdayError, setBirthdayError] = useState(false)
-    const [isFormValid, setIsFormValid] = useState(false)
+
 
 
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [isFormValid, setIsFormValid] = useState(false);
 
-
-    /*
     const validateForm = () => {
         const isValid =
             !nameError &&
@@ -30,26 +28,27 @@ const Login = () => {
             !hobbyError &&
             !birthdayError &&
             password !== "" &&
-            confirmPassword !== ""
+            confirmPassword !== "" &&
+            Array.from(document.querySelectorAll('[name="hobby"]:checked')).length > 0;
+
         setIsFormValid(isValid);
-    }
-    */
+    };
+
 
 
     const handlePassword = (event) =>{
-        const valida = event.target.value
+        const triedPassword = event.target.value
 
-        setPassword(valida)
-        setPasswordErrorEmpty(valida === "")
-        //validateForm()
+        setPassword(triedPassword)
+        setPasswordErrorEmpty(triedPassword === "")
+        validateForm()
     }
 
     const handleHobbyChange = (event)=>{
         const hobbies = Array.from(event.target.form.elements.hobby)
         .filter((checkbox) => checkbox.checked)
         setHobbyError(hobbies.length === 0)
-        //validateForm()
-
+        validateForm()
     }
 
     const handleBirthdayChange = (event) => {
@@ -72,18 +71,17 @@ const Login = () => {
         } else {
             setBirthdayError(false); 
         }
-       // validateForm()
-
-    };
+        validateForm()
+    }
     
     const enviarInformacion = (event) => {
         event.preventDefault() 
-        //validateForm()
+        console.log("formulario completo")
 
         const name = event.target.elements.name.value
         const lastName = event.target.elements.lastName.value
         const email = event.target.elements.email.value
-        const gener = event.target.elements.gener.value
+        const gender = event.target.elements.gender.value
         const hobbies = Array.from(event.target.elements.hobby)
         .filter((checkbox) => checkbox.checked)
         .map((checkbox) => checkbox.value)
@@ -92,16 +90,24 @@ const Login = () => {
         const datos = {};
 
 
-        if (!name || !lastName || !email){
+        if (!name){
             setNameError(true)
-            setLastNameError(true)
-            setEmailError(true)
-            return
-
         } else {
             datos.nombre = name;
-            datos.apellidos = lastName;
-            datos.email = email;
+        }
+
+        if(!lastName){
+            setLastNameError(true)
+
+        }else{
+            datos.lastName=lastName;
+        }
+
+        if(!email){
+            setEmailError(true)
+
+        }else{
+            datos.email=email;
         }
 
         if (!password) {
@@ -121,14 +127,12 @@ const Login = () => {
         setPasswordError(false)
        
 
-        if (!gener) {
+        if (!gender) {
             setGenerError(true)
         } else {
             setGenerError(false)
-            datos.genero = gener;
+            datos.genero = gender;
         }
-
-        console.log("Género seleccionado:", gener)
 
         if (hobbies.length === 0) {
             setHobbyError(true)
@@ -137,23 +141,12 @@ const Login = () => {
             datos.hobby = hobbies;
         }
 
-        console.log("Hobbies seleccionados:", hobbies)
-
         if(!birthday){
             setBirthdayError("selecciona tu fecha de nacimiento")
         } else  {
             datos.cumpleanos = birthday;
         }
 
-    
-
-        /*
-        if (isFormValid) {
-            console.log("Formulario enviado con éxito!");
-        } else {
-            console.log("Formulario incompleto");
-        }
-        */
         
         console.log("Datos del formulario:", datos);
     };
@@ -168,7 +161,8 @@ const Login = () => {
                     id="name"
                     placeholder="ingresa tu nombre" 
                     className={nameError ? "error" : ""}
-                    onChange={()=>setNameError(false)}
+                    onChange={()=>setNameError(false)
+                    }
                 />
                 {nameError && <span className="error_message">Este campo es obligatorio</span>}
 
@@ -219,7 +213,7 @@ const Login = () => {
                     <label htmlFor="male">
                         <input 
                             type="radio"
-                            name="gener"
+                            name="gender"
                             value="male"
                             id="male" 
                             
@@ -229,7 +223,7 @@ const Login = () => {
                     <label htmlFor="female">
                         <input 
                             type="radio"
-                            name="gener"
+                            name="gender"
                             value="female"
                             id="female" 
                             
@@ -295,7 +289,8 @@ const Login = () => {
                 
                 <button 
                 type="submit"
-                
+                disabled={!isFormValid}
+                className={`boton ${isFormValid ? "boton-habilitado" : "boton-deshabilitado"}`}
                 >Iniciar Sesión</button>
             </form>
         </div>
