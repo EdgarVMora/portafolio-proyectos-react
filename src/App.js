@@ -1,5 +1,5 @@
 import Login from './login/Login';
-import Validacion from './validacion formulario/Validacion'
+import Validacion from './validacionFormulario/Validacion'
 import DiferentesFormularios from './ejercicioTres/DiferentesFormularios'
 
 function App() {
