@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: rebeccapurple;
-    
+   
 }
 
 .estructura_login {
@@ -24,6 +24,7 @@
   label {
     font-weight: bold;
     margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
   }
   
   
@@ -44,8 +45,15 @@
     border-color: green;
   }
   
+  .error{
+    color: red;
+    font-style: italic;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
  
   button {
+    margin-top: 1rem;
     padding: 0.5rem;
     font-size: 1rem;
     background-color: #007bff;
