@@ -8,6 +8,8 @@ const MejorasFormulario = () => {
     correo: "",
     contrasena: "",
     genero: "",
+    hobbies: [],
+    fechaDeNacimiento: "",
   })
 
   const [fieldTouched, setFieldTouched] = useState({
@@ -24,6 +26,7 @@ const MejorasFormulario = () => {
     correo: "",
     contrasena: "",
     genero: "",
+    fechaDeNacimiento: "",
   })
 
   const validateField = (name, value) => {
@@ -32,33 +35,57 @@ const MejorasFormulario = () => {
         message = "Este campo es obligatorio"
     } else if (name === "contrasena" && value.length < 6) {
         message = "Debe tener al menos 6 caracteres";
-      }
+      } else if (name == "fechaDeNacimiento"){
+        const selectedDate = new Date(value);
+        const today = new Date();
+        const age = today.getFullYear() - selectedDate.getFullYear();
+        const monthDifference = today.getMonth() - selectedDate.getMonth();
+        const dayDifference = today.getDate() - selectedDate.getDate();
+
+        const isUnderage = monthDifference < 0 || (monthDifference === 0 && dayDifference < 0);
+        if (age < 18 || (age === 18 && isUnderage)) {
+            message = "Debes tener al menos 18 años"
+        }
+    }
     setErrorMessage((prev)=> ({
         ...prev,
         [name]: message,
     }))
   }
 
+
   const isFormComplete =
-    formData.nombre && formData.apellido && formData.correo && formData.contrasena
+    formData.nombre && formData.apellido && formData.correo && formData.contrasena && formData.genero && formData.hobbies && formData.fechaDeNacimiento
 
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value, type, checked } = e.target
+    if(type === "checkbox"){
+        setFormData((prev) => ({
+            ...prev,
+            hobbies: checked
+            ? [...prev.hobbies, value] 
+            : prev.hobbies.filter((item) => item !== value),
+        }))
+    }else { 
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }))
+    }
+
     validateField(name, value)
   }
 
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
+    
     setFieldTouched((prev) => ({
       ...prev,
       [name]: true,
     }))
+    
     validateField(name, value)
   }
 
@@ -167,53 +194,65 @@ const MejorasFormulario = () => {
       <div className="campo">
       <fieldset>
                     <legend>Que opcion te interesa mas:</legend>
-                        <label htmlFor="sport">
+                        <label htmlFor="deporte">
                             <input 
                                 type="checkbox"
                                 name="hobby"
-                                value="sport"
-                                id="sport"
+                                value="deporte"
+                                checked={formData.hobbies.includes("deporte")}
+                                onChange={handleChange}
                                 
                             />
                             Deportes
                         </label>
-                        <label htmlFor="music">
+                        <label htmlFor="musica">
                             <input 
                                 type="checkbox"
                                 name="hobby"
-                                value="music"
-                                id="music"
+                                value="musica"
+                                checked={formData.hobbies.includes("musica")}
+                                onChange={handleChange}
                                 
                             />
                             Musica
                         </label>
-                        <label htmlFor="art">
+                        <label htmlFor="arte">
                             <input 
                                 type="checkbox"
                                 name="hobby"
-                                value="art"
-                                id="art"
+                                value="arte"
+                                checked={formData.hobbies.includes("arte")}
+                                onChange={handleChange}
                                 
                             />
                             Arte
                         </label>
-                         <label htmlFor="technology">
+                         <label htmlFor="tecnologia">
                             <input 
                                 type="checkbox"
                                 name="hobby"
-                                value="technology"
-                                id="technology"
+                                value="tecnologia"
+                                checked={formData.hobbies.includes("tecnologia")}
+                                onChange={handleChange}
                             />
                             Tecnologia
                         </label>
                 </fieldset>    
       </div>
       <div className="campo">
-      <label htmlFor="birthday">Seleciona tu fecha de nacimiento</label>
+      <label htmlFor="birthday">Seleciona tu fecha de nacimiento
                 <input 
                     type="date"
-                    id="birthday" 
+                    name="fechaDeNacimiento"
+                    value={formData.fechaDeNacimiento} 
+                    onChange={(e) => {
+                        handleChange(e);
+                        validateField(e.target.name, e.target.value);
+                    }}
+                    className={errorMessage.fechaDeNacimiento ? "error" : ""}
                 />
+                </label>
+                {errorMessage.fechaDeNacimiento && <span className="error">{errorMessage.fechaDeNacimiento}</span>}
       </div>
       <button type="submit" disabled={!isFormComplete}>
         Enviar
