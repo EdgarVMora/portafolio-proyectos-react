@@ -33,29 +33,42 @@ const MejorasFormulario = () => {
     let message = ""
     if(!value){
         message = "Este campo es obligatorio"
-    } else if (name === "contrasena" && value.length < 6) {
-        message = "Debe tener al menos 6 caracteres";
-      } else if (name == "fechaDeNacimiento"){
-        const selectedDate = new Date(value);
-        const today = new Date();
-        const age = today.getFullYear() - selectedDate.getFullYear();
-        const monthDifference = today.getMonth() - selectedDate.getMonth();
-        const dayDifference = today.getDate() - selectedDate.getDate();
-
-        const isUnderage = monthDifference < 0 || (monthDifference === 0 && dayDifference < 0);
-        if (age < 18 || (age === 18 && isUnderage)) {
-            message = "Debes tener al menos 18 años"
+    }else if (name === "correo" && !/\S+@\S+\.\S+/.test(value)){
+      message = "El correo debe llevar un @ y un dominio valido";
+    }else if (name === "contrasena") {
+        if (value.length < 8) {
+          message = "Debe tener al menos 8 caracteres";
+        } else if (!/[A-Z]/.test(value)) {
+          message = "Debe contener al menos una letra mayúscula";
+        } else if (!/\d/.test(value)) {
+          message = "Debe contener al menos un número";
         }
-    }
-    setErrorMessage((prev)=> ({
+      } else if (name === "fechaDeNacimiento") {
+        const selectedDate = new Date(value); // Convertir a objeto Date
+        const today = new Date();
+    
+        if (isNaN(selectedDate.getTime())) {
+          message = "La fecha no es válida";
+        } else {
+          let age = today.getFullYear() - selectedDate.getFullYear();
+          const monthDifference = today.getMonth() - selectedDate.getMonth();
+          const dayDifference = today.getDate() - selectedDate.getDate();
+    
+          if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+            age--;
+          }
+    
+          if (age < 18) {
+            message = "Debes tener al menos 18 años";
+          }
+        }
+      }
+    
+      setErrorMessage((prev) => ({
         ...prev,
         [name]: message,
-    }))
-  }
-
-
-  const isFormComplete =
-    formData.nombre && formData.apellido && formData.correo && formData.contrasena && formData.genero && formData.hobbies && formData.fechaDeNacimiento
+      }));
+    };
 
 
   const handleChange = (e) => {
@@ -94,6 +107,19 @@ const MejorasFormulario = () => {
     e.preventDefault();
     console.log("Datos enviados:", formData)
   }
+
+  const isFormComplete = () => {
+
+    const hasErrors = Object.values(errorMessage).some((msg) => msg !== "");
+  
+
+    const requiredFields = ["nombre", "apellido", "correo", "contrasena", "fechaDeNacimiento"];
+    const allFieldsFilled = requiredFields.every(
+      (field) => formData[field] && formData[field] !== ""
+    );
+  
+    return !hasErrors && allFieldsFilled;
+  };
 
   return (
     <div className="contenedor_login">
@@ -254,7 +280,7 @@ const MejorasFormulario = () => {
                 </label>
                 {errorMessage.fechaDeNacimiento && <span className="error">{errorMessage.fechaDeNacimiento}</span>}
       </div>
-      <button type="submit" disabled={!isFormComplete}>
+      <button type="submit" disabled={!isFormComplete()}>
         Enviar
       </button>
     </form>
