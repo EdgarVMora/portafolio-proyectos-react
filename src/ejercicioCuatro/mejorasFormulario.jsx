@@ -70,7 +70,6 @@ const MejorasFormulario = () => {
       }));
     };
 
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
     if(type === "checkbox"){
@@ -90,7 +89,6 @@ const MejorasFormulario = () => {
     validateField(name, value)
   }
 
-
   const handleBlur = (e) => {
     const { name, value } = e.target;
     
@@ -103,7 +101,6 @@ const MejorasFormulario = () => {
       validateField(name, value);
     }
   }
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
