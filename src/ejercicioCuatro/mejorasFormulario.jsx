@@ -34,7 +34,7 @@ const MejorasFormulario = () => {
     if(!value){
         message = "Este campo es obligatorio"
     }else if (name === "correo" && !/\S+@\S+\.\S+/.test(value)){
-      message = "El correo debe llevar un @ y un dominio valido";
+      message = "El correo debe llevar un @ y un dominio valido"
     }else if (name === "contrasena") {
         if (value.length < 8) {
           message = "Debe tener al menos 8 caracteres";
@@ -44,7 +44,7 @@ const MejorasFormulario = () => {
           message = "Debe contener al menos un número";
         }
       } else if (name === "fechaDeNacimiento") {
-        const selectedDate = new Date(value); // Convertir a objeto Date
+        const selectedDate = new Date(value); 
         const today = new Date();
     
         if (isNaN(selectedDate.getTime())) {
@@ -99,7 +99,9 @@ const MejorasFormulario = () => {
       [name]: true,
     }))
     
-    validateField(name, value)
+    if (value || errorMessage[name]) {
+      validateField(name, value);
+    }
   }
 
 
@@ -124,7 +126,7 @@ const MejorasFormulario = () => {
   return (
     <div className="contenedor_login">
 <form className="estructura_login" onSubmit={handleSubmit}>
-    <h2>Registro</h2>
+    <h2>Registro de usuario</h2>
       <div className="campo">
         <label htmlFor="nombre">Nombre:</label>
         <input
@@ -165,7 +167,7 @@ const MejorasFormulario = () => {
           onBlur={handleBlur}
           className={fieldTouched.correo ? (formData.correo ? "verde" : "rojo") : ""}
         />
-        {errorMessage && <span className="error">{errorMessage.email}</span>}
+        {errorMessage && <span className="error">{errorMessage.correo}</span>}
       </div>
       <div className="campo">
         <label htmlFor="contrasena">Contraseña:</label>

@@ -16,21 +16,16 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
+h2{
+    text-align: center;
 }
 
-button:hover {
-    background-color: #0056b3;
+label {
+    text-align: center;
+}
+
+::placeholder{
+    text-align: center;
 }
 
 fieldset {
@@ -44,6 +39,7 @@ fieldset {
 
 
 fieldset legend {
+    text-align: center;
     font-weight: bold;
     font-size: 1.2rem; 
     color: black; 
@@ -60,7 +56,6 @@ fieldset label {
     cursor: pointer; 
 }
 
-/* Estilo para los checkboxes */
 fieldset input[type="checkbox"] {
     margin-right: 10px; 
     width: 18px; 
@@ -82,6 +77,22 @@ input.error {
     font-style: italic;
 }
 
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
 .boton-habilitado {
     background-color: #007bff;
     color: white;
@@ -101,4 +112,67 @@ input.error {
     border-radius: 4px;
     cursor: not-allowed;
     font-size: 16px;
+}
+
+@media (max-width: 576px) {
+    .contenedor-login {
+        flex-direction: column; 
+        padding: 10px;
+    }
+
+    .estructura-login {
+        width: 90%; 
+        padding: 15px;
+    }
+
+    fieldset legend {
+        font-size: 1rem; 
+    }
+
+    button {
+        font-size: 14px; 
+        padding: 8px;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .contenedor-login {
+        padding: 20px;
+    }
+
+    .estructura-login {
+        width: 400px; 
+        padding: 20px;
+    }
+
+    fieldset legend {
+        font-size: 1.1rem; 
+    }
+
+    button {
+        font-size: 15px; 
+        padding: 9px;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .contenedor-login {
+        padding: 40px; 
+    }
+
+    .estructura-login {
+        width: 500px; 
+        padding: 30px;
+    }
+
+    fieldset legend {
+        font-size: 1.3rem;
+    }
+
+    button {
+        font-size: 16px; 
+        padding: 10px;
+    }
 }
