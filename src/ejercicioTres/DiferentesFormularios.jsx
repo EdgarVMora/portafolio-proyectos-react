@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./diferentes-formularios.css"; 
+import "./diferentesFormularios.css"; 
 
 const Login = () => {
     const [nameError, setNameError]=useState(false)
