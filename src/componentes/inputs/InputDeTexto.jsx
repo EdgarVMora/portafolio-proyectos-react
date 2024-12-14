@@ -3,7 +3,7 @@
 function TextInput ({
     type,
     id,
-    name,
+    label,
     placeholder,
     value,
     onChange,
@@ -13,11 +13,11 @@ function TextInput ({
 }){
 return (
     <div className="campo">
-<label htmlFor={id}>Nombre:</label>
+<label htmlFor={id}>{label}:</label>
         <input
           type={type}
           id={id}
-          name={name}
+          label={label}
           placeholder={placeholder}
           value={value}
           onChange={onChange}

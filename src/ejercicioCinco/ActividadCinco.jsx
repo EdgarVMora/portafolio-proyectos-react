@@ -30,13 +30,13 @@ const ActividadCinco = () => {
     fechaDeNacimiento: "",
   })
 
-  const validateField = (name, value) => {
+  const validateField = (id, value) => {
     let message = ""
     if(!value){
         message = "Este campo es obligatorio"
-    }else if (name === "correo" && !/\S+@\S+\.\S+/.test(value)){
+    }else if (id === "correo" && !/\S+@\S+\.\S+/.test(value)){
       message = "El correo debe llevar un @ y un dominio valido"
-    }else if (name === "contrasena") {
+    }else if (id === "contrasena") {
         if (value.length < 8) {
           message = "Debe tener al menos 8 caracteres";
         } else if (!/[A-Z]/.test(value)) {
@@ -44,7 +44,7 @@ const ActividadCinco = () => {
         } else if (!/\d/.test(value)) {
           message = "Debe contener al menos un número";
         }
-      } else if (name === "fechaDeNacimiento") {
+      } else if (id === "fechaDeNacimiento") {
         const selectedDate = new Date(value); 
         const today = new Date();
     
@@ -67,12 +67,12 @@ const ActividadCinco = () => {
     
       setErrorMessage((prev) => ({
         ...prev,
-        [name]: message,
+        [id]: message,
       }));
     };
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { id, value, type, checked } = e.target
     if(type === "checkbox"){
         setFormData((prev) => ({
             ...prev,
@@ -83,23 +83,23 @@ const ActividadCinco = () => {
     }else { 
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [id]: value,
     }))
     }
 
-    validateField(name, value)
+    validateField(id, value)
   }
 
   const handleBlur = (e) => {
-    const { name, value } = e.target;
+    const { id, value } = e.target;
     
     setFieldTouched((prev) => ({
       ...prev,
-      [name]: true,
+      [id]: true,
     }))
     
-    if (value || errorMessage[name]) {
-      validateField(name, value);
+    if (value || errorMessage[id]) {
+      validateField(id, value);
     }
   }
 
@@ -126,64 +126,68 @@ const ActividadCinco = () => {
 <form className="estructura_login" onSubmit={handleSubmit}>
     <h2>Registro de usuario</h2>
     <TextInput 
-    type="text"
-    id="nombre"
-    name="nombre"
-    placeholder="ingresa tu nombre"
-    value={formData.nombre}
-    onChange={handleChange}
-    onBlur={handleBlur}
-    fieldTouched={fieldTouched.nombre}
-    error={errorMessage.nombre}
+      type="text"
+      id="nombre"
+      label="nombre"
+      placeholder="ingresa tu nombre"
+      value={formData.nombre}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      fieldTouched={fieldTouched.nombre}
+      error={errorMessage.nombre}
     />
 
+    <TextInput 
+        type="text"
+        id="apellido"
+        label="apellido"
+        placeholder="ingresa tus apellidos"
+        value={formData.apellido}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        fieldTouched={fieldTouched.apellido}
+        error={errorMessage.apellido}
+    />
 
+    <TextInput 
+        type="email"
+        id="correo"
+        label="correo"
+        placeholder="ingresa tu correo"
+        value={formData.correo}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        fieldTouched={fieldTouched.correo}
+        error={errorMessage.correo}
+    />
 
+    <TextInput 
+        type="password"
+        id="contrasena"
+        label="contraseña"
+        placeholder="crea una contraseña"
+        value={formData.contrasena}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        fieldTouched={fieldTouched.contrasena}
+        error={errorMessage.contrasena}
+    />
 
-      <div className="campo">
-        <label htmlFor="apellido">Apellido:</label>
-        <input
-          type="text"
-          id="apellido"
-          name="apellido"
-          placeholder="Ingresa tus apellidos"
-          value={formData.apellido}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className={fieldTouched.apellido ? (formData.apellido ? "verde" : "rojo") : ""}
-        />
-        {errorMessage && <span className="error">{errorMessage.apellido}</span>}
-      </div>
-      <div className="campo">
-        <label htmlFor="correo">Correo:</label>
-        <input
-          type="email"
-          id="correo"
-          name="correo"
-          placeholder="Ingresa tu email"
-          value={formData.correo}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className={fieldTouched.correo ? (formData.correo ? "verde" : "rojo") : ""}
-        />
-        {errorMessage && <span className="error">{errorMessage.correo}</span>}
-      </div>
-      <div className="campo">
-        <label htmlFor="contrasena">Contraseña:</label>
-        <input
-          type="password"
-          id="contrasena"
-          name="contrasena"
-          placeholder="Ingresa una contrasena"
-          value={formData.contrasena}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className={fieldTouched.contrasena ? (formData.contrasena ? "verde" : "rojo") : ""}
-        />
-        {errorMessage && <span className="error">{errorMessage.contrasena}</span>}
-
-      </div>
-
+<TextInput 
+        type="date"
+        id="fechaDeNacimiento"
+        label="Fecha de nacimiento"
+        //placeholder=""
+        value={formData.fechaDeNacimiento}
+        onChange={(e) => {
+          handleChange(e);
+          validateField(e.target.name, e.target.value)}}
+        onBlur={handleBlur}
+        fieldTouched={fieldTouched.fechaDeNacimiento}
+        error={errorMessage.fechaDeNacimiento}
+    />
+ {
+        /*
       <div className="campo">
       <fieldset>
                     <legend>Seleciona tu genero:</legend>
@@ -281,6 +285,8 @@ const ActividadCinco = () => {
                 </label>
                 {errorMessage.fechaDeNacimiento && <span className="error">{errorMessage.fechaDeNacimiento}</span>}
       </div>
+       */
+    }
       <button type="submit" disabled={!isFormComplete()}>
         Enviar
       </button>
