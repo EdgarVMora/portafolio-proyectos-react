@@ -1,5 +1,7 @@
 import { useState } from "react"
 import TextInput from "../componentes/inputs/InputDeTexto"
+import RadioInput from "../componentes/inputs/InputDeRadio"
+import CheckboxGroup from "../componentes/inputs/InputDeCheckbox"
 import "./actividadCinco.css" 
 
 const ActividadCinco = () => {
@@ -119,7 +121,20 @@ const ActividadCinco = () => {
     );
   
     return !hasErrors && allFieldsFilled;
-  };
+  }
+
+  const generoOptions = [
+    { id: "male", label: "Masculino" },
+    { id: "female", label: "Femenino" },
+    { id: "otro", label: "Otro" },
+  ]
+
+  const options = [
+    { value: "deporte", label: "Deportes" },
+    { value: "musica", label: "Música" },
+    { value: "arte", label: "Arte" },
+    { value: "tecnologia", label: "Tecnología" },
+  ]
 
   return (
     <div className="contenedor_login">
@@ -138,56 +153,119 @@ const ActividadCinco = () => {
     />
 
     <TextInput 
-        type="text"
-        id="apellido"
-        label="apellido"
-        placeholder="ingresa tus apellidos"
-        value={formData.apellido}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        fieldTouched={fieldTouched.apellido}
-        error={errorMessage.apellido}
+      type="text"
+      id="apellido"
+      label="apellido"
+      placeholder="ingresa tus apellidos"
+      value={formData.apellido}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      fieldTouched={fieldTouched.apellido}
+      error={errorMessage.apellido}
     />
 
     <TextInput 
-        type="email"
-        id="correo"
-        label="correo"
-        placeholder="ingresa tu correo"
-        value={formData.correo}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        fieldTouched={fieldTouched.correo}
-        error={errorMessage.correo}
+      type="email"
+      id="correo"
+      label="correo"
+      placeholder="ingresa un correo"
+      value={formData.correo}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      fieldTouched={fieldTouched.correo}
+      error={errorMessage.correo}
     />
 
     <TextInput 
-        type="password"
-        id="contrasena"
-        label="contraseña"
-        placeholder="crea una contraseña"
-        value={formData.contrasena}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        fieldTouched={fieldTouched.contrasena}
-        error={errorMessage.contrasena}
+      type="password"
+      id="contrasena"
+      label="contraseña"
+      placeholder="crea una contraseña"
+      value={formData.contrasena}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      fieldTouched={fieldTouched.contrasena}
+      error={errorMessage.contrasena}
     />
 
-<TextInput 
-        type="date"
-        id="fechaDeNacimiento"
-        label="Fecha de nacimiento"
-        //placeholder=""
-        value={formData.fechaDeNacimiento}
-        onChange={(e) => {
-          handleChange(e);
-          validateField(e.target.name, e.target.value)}}
-        onBlur={handleBlur}
-        fieldTouched={fieldTouched.fechaDeNacimiento}
-        error={errorMessage.fechaDeNacimiento}
+    <div className="campo">
+      <fieldset>
+        <legend>Selecciona tu género:</legend>
+        <RadioInput 
+        options={generoOptions} 
+        onChange={handleChange} 
+        />
+      </fieldset>
+      {errorMessage.genero && <span className="error">{errorMessage.genero}</span>}
+    </div>
+
+    <div className="campo">
+      <CheckboxGroup
+        options={options}
+        formData={formData}
+        handleChange={handleChange}
+      />
+    </div>
+
+    <TextInput 
+      type="date"
+      id="fechaDeNacimiento"
+      label="Fecha de nacimiento"
+      value={formData.fechaDeNacimiento}
+      onChange={(e) => {
+        handleChange(e);
+        validateField(e.target.name, e.target.value)}}
+      onBlur={handleBlur}
+      fieldTouched={fieldTouched.fechaDeNacimiento}
+      error={errorMessage.fechaDeNacimiento}
     />
- {
-        /*
+
+      {/*
+      <div className="campo">
+        <label htmlFor="apellido">Apellido:</label>
+        <input
+          type="text"
+          id="apellido"
+          name="apellido"
+          placeholder="Ingresa tus apellidos"
+          value={formData.apellido}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={fieldTouched.apellido ? (formData.apellido ? "verde" : "rojo") : ""}
+        />
+        {errorMessage && <span className="error">{errorMessage.apellido}</span>}
+      </div>
+      <div className="campo">
+        <label htmlFor="correo">Correo:</label>
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          placeholder="Ingresa tu email"
+          value={formData.correo}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={fieldTouched.correo ? (formData.correo ? "verde" : "rojo") : ""}
+        />
+        {errorMessage && <span className="error">{errorMessage.correo}</span>}
+      </div>
+      <div className="campo">
+        <label htmlFor="contrasena">Contraseña:</label>
+        <input
+          type="password"
+          id="contrasena"
+          name="contrasena"
+          placeholder="Ingresa una contrasena"
+          value={formData.contrasena}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={fieldTouched.contrasena ? (formData.contrasena ? "verde" : "rojo") : ""}
+        />
+        {errorMessage && <span className="error">{errorMessage.contrasena}</span>}
+
+      </div>
+
+>>>>>>> bd9ead5 (se agrego componente para checkbox)
       <div className="campo">
       <fieldset>
                     <legend>Seleciona tu genero:</legend>
@@ -285,8 +363,9 @@ const ActividadCinco = () => {
                 </label>
                 {errorMessage.fechaDeNacimiento && <span className="error">{errorMessage.fechaDeNacimiento}</span>}
       </div>
-       */
-    }
+
+      */}
+
       <button type="submit" disabled={!isFormComplete()}>
         Enviar
       </button>
