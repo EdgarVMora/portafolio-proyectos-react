@@ -13,7 +13,7 @@ const ActividadCinco = () => {
     genero: "",
     hobbies: [],
     fechaDeNacimiento: "",
-    tyc: "",
+    tyc: false,
   })
 
   const [fieldTouched, setFieldTouched] = useState({
@@ -49,7 +49,7 @@ const ActividadCinco = () => {
         } else if (!/\d/.test(value)) {
           message = "Debe contener al menos un número";
         }
-      } else if(id === "tyc") {
+      } else if(!id === "tyc") {
         message = "Debes aceptar los terminos y condiciones"
       } else if (id === "fechaDeNacimiento") {
         const selectedDate = new Date(value); 
@@ -84,7 +84,7 @@ const ActividadCinco = () => {
         if (id === "tyc"){
           setFormData((prev) => ({
             ...prev,
-            acceptTerms: checked,
+            tyc: checked,
           }))
 
         } else { 
