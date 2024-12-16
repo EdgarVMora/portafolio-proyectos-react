@@ -13,6 +13,7 @@ const ActividadCinco = () => {
     genero: "",
     hobbies: [],
     fechaDeNacimiento: "",
+    tyc: "",
   })
 
   const [fieldTouched, setFieldTouched] = useState({
@@ -21,6 +22,7 @@ const ActividadCinco = () => {
     correo: false,
     contrasena: false,
     genero: false,
+    tyc: false,
   })
 
   const [errorMessage, setErrorMessage] = useState ({
@@ -30,6 +32,7 @@ const ActividadCinco = () => {
     contrasena: "",
     genero: "",
     fechaDeNacimiento: "",
+    tyc: ""
   })
 
   const validateField = (id, value) => {
@@ -46,6 +49,8 @@ const ActividadCinco = () => {
         } else if (!/\d/.test(value)) {
           message = "Debe contener al menos un número";
         }
+      } else if(id === "tyc") {
+        message = "Debes aceptar los terminos y condiciones"
       } else if (id === "fechaDeNacimiento") {
         const selectedDate = new Date(value); 
         const today = new Date();
@@ -65,7 +70,7 @@ const ActividadCinco = () => {
             message = "Debes tener al menos 18 años";
           }
         }
-      }
+      } 
     
       setErrorMessage((prev) => ({
         ...prev,
@@ -76,13 +81,20 @@ const ActividadCinco = () => {
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target
     if(type === "checkbox"){
-        setFormData((prev) => ({
+        if (id === "tyc"){
+          setFormData((prev) => ({
+            ...prev,
+            acceptTerms: checked,
+          }))
+
+        } else { 
+          setFormData((prev) => ({
             ...prev,
             hobbies: checked
             ? [...prev.hobbies, value] 
             : prev.hobbies.filter((item) => item !== value),
         }))
-    }else { 
+    }}else { 
     setFormData((prev) => ({
       ...prev,
       [id]: value,
@@ -115,7 +127,7 @@ const ActividadCinco = () => {
     const hasErrors = Object.values(errorMessage).some((msg) => msg !== "");
   
 
-    const requiredFields = ["nombre", "apellido", "correo", "contrasena", "fechaDeNacimiento"];
+    const requiredFields = ["nombre", "apellido", "correo", "contrasena", "fechaDeNacimiento", "tyc"];
     const allFieldsFilled = requiredFields.every(
       (field) => formData[field] && formData[field] !== ""
     );
@@ -219,6 +231,19 @@ const ActividadCinco = () => {
       fieldTouched={fieldTouched.fechaDeNacimiento}
       error={errorMessage.fechaDeNacimiento}
     />
+
+    <div className="campo">
+        <label htmlFor="tyc">
+          <input
+            type="checkbox"
+            id="tyc"
+            checked={formData.tyc}
+            onChange={handleChange}
+          />
+          Acepto los términos y condiciones
+        </label>
+        {errorMessage.tyc && <span className="error">{errorMessage.tyc}</span>}
+        </div>
 
       {/*
       <div className="campo">
